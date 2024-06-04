@@ -1,0 +1,47 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration</title>
+    <script>
+        function loadTerritories() {
+            fetch('get_territories.php')
+                .then(response => response.json())
+                .then(data => {
+                    const territorySelect = document.getElementById('territory');
+                    data.forEach(territory => {
+                        let option = document.createElement('option');
+                        option.value = territory;
+                        option.text = territory;
+                        territorySelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error loading territories:', error));
+        }
+
+        window.onload = function() {
+            loadTerritories();
+        };
+    </script>
+</head>
+<body>
+    <h1> HarperLove Employee Registration</h1>
+    <?php if (isset($_GET['employee_number'])): ?>
+        <p>Employee Number Registered: <strong><?php echo htmlspecialchars($_GET['employee_number']); ?></strong></p>
+    <?php endif; ?>
+    <form action="register.php" method="POST">
+        <label for="username">Username (ALL CAPS):</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="territory">Territory Number:</label>
+        <select id="territory" name="territory" required>
+            <option value="">Select Territory</option>
+        </select>
+        <br>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
+
+
