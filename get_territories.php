@@ -14,13 +14,13 @@ if ($conn->connect_error) {
 }
 
 // Fetch territories
-$sql = "SELECT territory_number FROM territories";
+$sql = "SELECT territory FROM tblTerritoryNames";
 $result = $conn->query($sql);
 
 $territories = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $territories[] = $row['territory_number'];
+        $territories[] = $row['territory'];
     }
 }
 
